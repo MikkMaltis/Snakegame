@@ -1,0 +1,27 @@
+#gameboard {
+    margin: 64px auto;
+    border-collapse: collapse;
+}
+
+#gameboard td {
+    border: solid 1px gray;
+    width: 8px;
+    height: 8px;
+}
+
+.snake {
+    background-color: blue;
+}
+
+.food {
+    background-color: green;
+}
+
+#message {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-size: 2rem;
+    font-weight: bold;
+}
