@@ -9,6 +9,16 @@
     height: 8px;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* This makes the body take up the full height of the viewport */
+    margin: 0; /* This removes any default margin */
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
 .snake {
     background-color: blue;
 }
@@ -24,4 +34,14 @@
     color: red;
     font-size: 2rem;
     font-weight: bold;
+}
+
+
+.gameover-main {
+    color: red;
+    font-size: 3rem;
+}
+
+.gameover-main2 {
+    font-size: 2rem;
 }

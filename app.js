@@ -1,6 +1,6 @@
 const gameBoardTable = document.getElementById('gameboard');
 
-const boardSize = 20
+const boardSize = 40
 
 let gameBoard = [...Array(boardSize).keys()].map(() => [...Array(boardSize).keys()].map(() => 0));
 
@@ -12,7 +12,7 @@ let snake = [snakeY + '_' + snakeX];
 
 let direction = 'u';
 
-let foodY, foodX;
+let foodY, foodX, foodEmojiIndex;
 
 let intervalID = setInterval(playGame, 200);
 
@@ -109,6 +109,7 @@ function ifHitsBorder ( y, x ) {
     if ( y < 0 || y >= boardSize || x < 0 || x >= boardSize ) {
         clearInterval(intervalID);
         intervalID = null;
+        document.getElementById('gameOverScreen').style.display = 'block';
         return true;
     }
 
