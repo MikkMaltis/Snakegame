@@ -14,7 +14,9 @@ let direction = 'u';
 
 let foodY, foodX, foodEmojiIndex;
 
-let intervalID = setInterval(playGame, 200);
+let foodArray = ['🍎'];
+
+let intervalID = setInterval(playGame, 100);
 
 document.addEventListener ('keydown', e => {
     switch ( e.key ) {
@@ -65,13 +67,12 @@ function drawGameBoard () {
                 boardCellTd.classList.add('snake');
             }
             if ( y == foodY && x == foodX ) {
-                boardCellTd.classList.add('food');
+                boardCellTd.innerHTML = foodArray[foodEmojiIndex];
             }
             boardRowTr.append(boardCellTd);
         });
         gameBoardTable.append(boardRowTr);
     });
-
 }
 
 
@@ -97,7 +98,6 @@ function calculateNewCursor () {
 
     if ( y == foodY && x == foodX ) {
         addFood();
-        snake.push(undefined);
     }
 
     return [y, x];    
@@ -125,9 +125,13 @@ function addFood () {
         foodX = Math.floor(Math.random() * boardSize);
     } while ( snake.includes(foodY + '_' + foodX) )
 
+    const foodTd = document.getElementById(foodY + '_' + foodX);
+    foodEmojiIndex = 0; // set foodEmojiIndex to 0
+    foodTd.innerHTML = foodArray[foodEmojiIndex];
 
+    snake.push(snake[snake.length - 1]);
+}
 
     // const foodTd = document.getElementById(y + '_' + x);
     // console.log(y + '_' + x, foodTd);
     // foodTd.classList.add('food');
-}
