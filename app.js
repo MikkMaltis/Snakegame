@@ -14,6 +14,8 @@ let direction = 'u';
 
 let foodY, foodX, foodEmojiIndex;
 
+let score = 0;
+
 let foodArray = ['🍎'];
 
 let intervalID = setInterval(playGame, 100);
@@ -39,18 +41,31 @@ addFood();
 
 // game engine
 function playGame () {
-
     let [cursorY, cursorX] = calculateNewCursor();
     
-    if ( ifHitsBorder(cursorY, cursorX) ) {
+    if ( ifHitsBorder(cursorY, cursorX) || ifHitsSelf(cursorY, cursorX) ) {
         return 0;
     }
-   
+
+    ifEatsFood(cursorY, cursorX); // Ensure this function is called
+
     snake.unshift(cursorY + '_' + cursorX);
     snake.pop();
 
     drawGameBoard();
 }
+
+function ifHitsSelf ( y, x ) {
+    const newSnakePosition = y + '_' + x;
+    if (snake.includes(newSnakePosition)) {
+        clearInterval(intervalID);
+        intervalID = null;
+        document.getElementById('gameOverScreen').style.display = 'block';
+        return true;
+    }
+    return false;
+}
+
 
 // for drawing game board
 function drawGameBoard () {
@@ -116,9 +131,38 @@ function ifHitsBorder ( y, x ) {
     return false;
 }
 
-// gerenate food with random
+function updateScore() {
+    document.getElementById('score').innerText = 'Score: ' + score;
+}
+
+let highScore = localStorage.getItem('highScore') || 0;
+document.getElementById('highscore').innerText = 'High Score: ' + highScore;
+
+function updateHighScore() {
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+        document.getElementById('highscore').innerText = 'High Score: ' + highScore;
+    }
+}
+
+function ifEatsFood(y, x) {
+    if ( y == foodY && x == foodX ) {
+        score++;
+        updateScore();
+        updateHighScore();
+        addFood();
+        return true;
+    }
+    return false;
+}
 
 function addFood () {
+    // remove food from old location
+    if (foodY !== undefined && foodX !== undefined) {
+        const oldFoodTd = document.getElementById(foodY + '_' + foodX);
+        oldFoodTd.innerHTML = '';
+    }
 
     do {
         foodY = Math.floor(Math.random() * boardSize);

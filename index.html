@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Snake</title>
 </head>
 <body>
-    <img id="playButton" src="media/playbutton.gif" alt="Play Button">
+    <div class="score" id="score">Score: 0</div>
+    <div class="highscore" id="highscore">High Score: 0</div>
+    <img class="play" id="playButton" src="media/playbutton.gif" alt="Play Button">
     <div class="gameover" id="gameOverScreen" style="display: none;">
         <h1 class="gameover-main">Game Over!</h1>
-        <p class="gameover-main2">The snake hit the wall.</p>
+        <p class="gameover-main2">Snake died.</p>
     </div>
     <table id="gameboard"></table>
     <script src="app.js"></script>

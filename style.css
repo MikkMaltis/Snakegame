@@ -45,3 +45,18 @@ body {
 .gameover-main2 {
     font-size: 2rem;
 }
+
+.play {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.score {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.highscore {
+    margin-left: 20px;
+    margin-right: 20px;
+}
